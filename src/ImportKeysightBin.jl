@@ -39,8 +39,7 @@ function importkeysightbin(f::IO)
 	meta[:size] = read(f, Int32)
 	meta[:nwaveforms] = read(f, Int32)
 	meta[:waveforms] = Vector{Dict{Symbol,Any}}(undef, meta[:nwaveforms])
-	xx = Vector()
-	yy = Vector()
+	channels = Vector{Tuple}()
 
 	# Waveforms
 	for wf_n in 1:meta[:nwaveforms]
@@ -66,8 +65,7 @@ function importkeysightbin(f::IO)
 		wf[:datasets] = Vector{Dict{Symbol,Any}}(undef, wf[:buffers])
 		x = range(start=wf[:xorigin], step=wf[:xincrement], length=wf[:points])
 		y = zeros(wf[:points], wf[:buffers])
-		push!(xx, x)
-		push!(yy, y)
+		push!(channels, (x, y))
 
 		# Data sets
 		for ds_n in 1:wf[:buffers]
@@ -80,7 +78,7 @@ function importkeysightbin(f::IO)
 			y[:,ds_n] = reinterpret(Float32, read(f, ds[:buffersize]))
 		end
 	end
-	(xx, yy, meta)
+	(channels..., meta)
 end
 
 function importkeysightbin(filename::AbstractString)
