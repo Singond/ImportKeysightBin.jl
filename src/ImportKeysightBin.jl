@@ -28,6 +28,24 @@ end
 	char = 6
 end
 
+"""
+    importkeysightbin(io)
+    importkeysightbin(filename)
+
+Import waveform data from the binary file format used by _Keysight_
+(formerly _Agilent_) oscilloscopes.
+
+The return value is a tuple containing a tuple of the `x` and `y` values
+for each channel found in the file, and a dictionary containing metadata
+read from the file header.
+
+# Examples
+```julia
+data = importkeysightbin(io)
+ch1, ch2, ch3, ch4, metadata = importkeysightbin(io)
+(x1, y1), (x2, y2), (x3, y3), (x4, y4), metadata = importkeysightbin(io)
+```
+"""
 function importkeysightbin(f::IO)
 	# File header
 	cookie = String(read(f, 2))
