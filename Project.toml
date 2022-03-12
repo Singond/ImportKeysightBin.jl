@@ -2,3 +2,6 @@ name = "ImportKeysightBin"
 uuid = "76a68121-5bb9-42aa-bb53-85bca5455360"
 authors = ["Jan Singon Slany <singond@seznam.cz>"]
 version = "0.1.2"
+
+[compat]
+julia = "1.7"
