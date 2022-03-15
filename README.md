@@ -4,8 +4,13 @@ Utility to import binary waveform data from Keysight (formerly Agilent)
 oscilloscopes into Julia. This is equivalent to the `importAgilentBin`
 function in Matlab and Python.
 
+Installation
+============
+Install the package with `Pkg.add("ImportKeysightBin")`.
+
 Usage
 =====
+Call the `importkeysightbin` function to import data from a file or IO:
 ```julia
 using ImportKeysightBin
 
